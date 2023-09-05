@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 
+
 typedef struct {
     int rows;
     int cols;
@@ -73,41 +74,3 @@ void freeMatrix(Matrix * matrix) {
 [1, 2, 3, 4, 5, 6] x [1, 2, 3, 4, 5, 6]
 
 */
-
-
-Matrix multiplyMatrix(Matrix * matrix1, Matrix * matrix2) {
-    if (matrix1->cols == matrix2->rows){
-        Matrix resultado = createMatrix(matrix1->rows, matrix2->cols);
-        for (int row = 0; row < matrix1->rows; row++) {
-            for (int col = 0; col < matrix2->cols; col++) {
-                //resultado->data[row * resultado->cols + col] percorro as posições da matriz resultado;
-                int posicaoResultado = row * matrix2->cols + col;
-                for (int col1 = 0; col1 < matrix1->cols; col1++) {
-                    int posMat1 = row * matrix1->cols + col1;
-                    int posMat2 = col1 * matrix2->cols + col;
-                    resultado.data[posicaoResultado] += matrix1->data[posMat1] * matrix2->data[posMat2];
-                }
-            }
-        }
-
-        return resultado;
-    }
-}
-
-void main() {
-    Matrix mat = createMatrix(2, 3);
-    Matrix mat1 = createMatrix(3, 2);
-
-    insertRandomElement(&mat, 10);
-    insertRandomElement(&mat1, 10);
-    printMatrix(&mat);
-    printMatrix(&mat1);
-
-    multiplyMatrix(&mat, &mat1);
-
-    Matrix resultado = multiplyMatrix(&mat, &mat1);
-    printMatrix(&resultado);
-
-    freeMatrix(&mat);
-    freeMatrix(&mat1);
-}

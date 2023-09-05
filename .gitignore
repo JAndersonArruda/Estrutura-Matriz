@@ -1,0 +1,8 @@
+# Arquivos e diretórios gerados pelo Visual Studio Code
+.vscode/
+
+# Arquivos de compilação e saída
+*.exe
+main
+array_matrix
+dynamic_array_matrix
