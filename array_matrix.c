@@ -17,23 +17,36 @@
 
 const int TAMANHO = 9;
 
+int fetchPosition (int row, int col) {
+    int position = (row - 1) * 3 + (col - 1);
+    return position;
+}
 
 void clearMatrix(int vet[TAMANHO]) {
-    for (int i = 0; i < TAMANHO; i++){
-        vet[i] = 0;
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            insertElement(vet, row + 1, col + 1, 0);
+        }
     }
 }
 
 void insertElement(int vet[TAMANHO], int row, int col, int value) {
-    int posicao = (row - 1) * 3 + (col - 1);
+    int posicao = fetchPosition(row, col);
     vet[posicao] = value;
 }
 
 void insertRandomElement (int vet[TAMANHO], int limite) {
-	for (int k = 0; k < TAMANHO; k++){
-		//Gerando valores de 0 a 100
-		vet[k] = rand() % limite;
-	}
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            int posicao = fetchPosition(row + 1, col + 1);
+            vet[posicao] = rand() % limite;
+        }
+    }
+
+	// for (int k = 0; k < TAMANHO; k++){
+	// 	//Gerando valores de 0 a 100
+	// 	vet[k] = rand() % limite;
+	// }
 }
 
 int fetchMatrix(int vet[TAMANHO], int row, int col) {
@@ -52,6 +65,8 @@ void printMatrix(int vet[TAMANHO]) {
 }
 
 void main() {
+    srand(time(NULL));
+
     int vet[TAMANHO];
     clearMatrix(vet);
 
