@@ -4,19 +4,22 @@
 #include "math_matrix.h"
 
 void main() {
-    Matrix mat = createMatrix(2, 3);
-    Matrix mat1 = createMatrix(3, 2);
+    Matrix mat = createMatrix(3, 3);
+    clearMatrix(&mat);
+    printMatrix(&mat);
+    printf("\n");
+
+    insertElement(&mat, 1);
+    printMatrix(&mat);
+    printf("\n");
+
+    insertElementPosition(&mat, 2, 3, 2);
+    printMatrix(&mat);
+    printf("\n");
 
     insertRandomElement(&mat, 10);
-    insertRandomElement(&mat1, 10);
     printMatrix(&mat);
-    printMatrix(&mat1);
-
-    multiplyMatrix(&mat, &mat1);
-
-    Matrix resultado = multiplyMatrix(&mat, &mat1);
-    printMatrix(&resultado);
+    printf("\n");
 
     freeMatrix(&mat);
-    freeMatrix(&mat1);
 }
