@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 
-
 typedef struct {
     int rows;
     int cols;
@@ -19,12 +18,10 @@ Matrix createMatrix(int rows, int cols) {
     return matrix;
 }
 
-void clearMatrix(Matrix * matrix){
-	for (int k = 0; k < matrix->rows * matrix->cols; k++){
-		matrix->data[k] = 0;
-	}
+int fetchPosition (Matrix * matrix, int row, int col) {
+    int position = (row - 1) * matrix->cols + (col - 1);
+    return position;
 }
-
 
 void insertElement(Matrix * matrix, int value) {
     if (matrix->lastElement < matrix->data + matrix->rows * matrix->cols) {
@@ -41,20 +38,28 @@ void insertRandomElement(Matrix * matrix, int limite) {
 }
 
 void insertElementPosition(Matrix * matrix, int row, int col, int value){
-	int posicao = (row - 1) * matrix->cols + (col - 1);
+	int posicao = fetchPosition(matrix, row, col);
 	matrix->data[posicao] = value;
 }
 
+void clearMatrix(Matrix * matrix){
+	for (int row = 0; row < matrix->rows; row++){
+        for (int col = 0; col < matrix->cols; col++){
+            insertElementPosition(matrix, row + 1, col + 1, 0);
+        }
+	}
+}
+
 int fetchMatrix(Matrix * matrix, int row, int col) {
-    int posicao = (row - 1) * matrix->cols + (col - 1);
+    int posicao = fetchPosition(matrix, row, col);
     int valor = matrix->data[posicao];
     return valor;
 }
 
 void printMatrix(Matrix * matrix) {
-    for (int i = 0; i < matrix->rows; i++) {
-        for (int j = 0; j < matrix->cols; j++) {
-            printf("%2d ", matrix->data[i * matrix->cols + j]);
+    for (int row = 0; row < matrix->rows; row++) {
+        for (int col = 0; col < matrix->cols; col++) {
+            printf("%2d ", fetchMatrix(matrix, row + 1, col + 1));
         }
         printf("\n");
     }
@@ -63,14 +68,3 @@ void printMatrix(Matrix * matrix) {
 void freeMatrix(Matrix * matrix) {
     free(matrix->data);
 }
-/*
- 1  2  3
- 4  5  6
-
- 1  2
- 3  4
- 5  6
-
-[1, 2, 3, 4, 5, 6] x [1, 2, 3, 4, 5, 6]
-
-*/
