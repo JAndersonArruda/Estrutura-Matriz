@@ -22,14 +22,6 @@ int fetchPosition (int row, int col) {
     return position;
 }
 
-void clearMatrix(int vet[TAMANHO]) {
-    for (int row = 0; row < 3; row++) {
-        for (int col = 0; col < 3; col++) {
-            insertElement(vet, row + 1, col + 1, 0);
-        }
-    }
-}
-
 void insertElement(int vet[TAMANHO], int row, int col, int value) {
     int posicao = fetchPosition(row, col);
     vet[posicao] = value;
@@ -49,16 +41,24 @@ void insertRandomElement (int vet[TAMANHO], int limite) {
 	// }
 }
 
+void clearMatrix(int vet[TAMANHO]) {
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            insertElement(vet, row + 1, col + 1, 0);
+        }
+    }
+}
+
 int fetchMatrix(int vet[TAMANHO], int row, int col) {
-    int posicao = (row - 1) * 3 + (col - 1);
+    int posicao = fetchPosition(row, col);
     int valor = vet[posicao];
     return valor;
 }
 
 void printMatrix(int vet[TAMANHO]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            printf("%2d ", vet[i * 3 + j]);
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            printf("%2d ", vet[fetchPosition(row+1, col+1)]);
         }
         printf("\n");
     }
