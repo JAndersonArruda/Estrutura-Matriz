@@ -23,3 +23,11 @@ void readFile(char nome[25]) {
 
     closeFile(file);
 }
+
+void whiteFile(char nome[25], char texto[100]) {
+    FILE *file = openFIle(nome, "w");
+
+    fprintf(file, texto);
+
+    closeFile(file);
+}
