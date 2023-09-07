@@ -31,3 +31,16 @@ void whiteFile(char nome[25], char texto[100]) {
 
     closeFile(file);
 }
+
+// int updateStringFile() {
+
+// }
+
+// int deleteStringFile() {
+
+// }
+
+void main() {
+    whiteFile("teste.txt", "Luiz Fernando");
+    readFile("teste.txt");
+}
