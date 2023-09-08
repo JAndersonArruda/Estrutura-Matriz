@@ -64,6 +64,27 @@ void printMatrix(int vet[TAMANHO]) {
     }
 }
 
+// Afunção somMatrix e  não salva em uma varialvel, apenas imprime a soma das duas
+void sumMatrix(int vet1[TAMANHO], int vet2[TAMANHO]) {
+    for (int row = 0; row < 3; row ++) {
+        for (int col = 0; col < 3; col ++) {
+            printf("%2d ", (vet1[fetchPosition(row +1, col +1)]) + (vet2[fetchPosition(row +1, col +1)]));
+        }
+        printf("\n");
+    }
+}
+
+// Afunção subtractMatrix e  não salva em uma varialvel, apenas imprime a soma das duas
+void subtractMatrix(int vet1[TAMANHO], int vet2[TAMANHO]) {
+    for (int row = 0; row < 3; row ++) {
+        for (int col = 0; col < 3; col ++) {
+            printf("%2d ", (vet1[fetchPosition(row +1, col +1)]) - (vet2[fetchPosition(row +1, col +1)]));
+        }
+        printf("\n");
+    }
+}
+
+
 void main() {
     srand(time(NULL));
 
