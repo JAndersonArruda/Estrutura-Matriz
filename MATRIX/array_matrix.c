@@ -110,6 +110,7 @@ void multiplyMatrix(int vet1[TAMANHO], int vet2[TAMANHO]) {
 
 
 
+
 void main() {
     srand(time(NULL));
 
