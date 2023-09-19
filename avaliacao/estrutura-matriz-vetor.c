@@ -58,16 +58,22 @@ void preencher (int mat[], int linhas, int colunas) {
 
 //Caluclando o produto de duas matrizes
 void produtoMatriz(int mat1[], int mat2[], int numLinhasMat1, int numColunasMat1, int numLinhasMat2, int numColunasMat2, int matrizResposta[]) {
-	int i, j, x, mult = 0;
-	for (i = 0; i < numLinhasMat1; i ++) {
-		for (j = 0; j < numColunasMat2; j++) {
-			for (x = 0; x < numColunasMat1; x++) {
-				mult += mat1[indice(i +1, x +1, numColunasMat1)] * mat2[indice(x +1, j +1, numColunasMat2)];
+	if (numLinhasMat1 == numColunasMat2) {
+		int i, j, x, mult = 0;
+		for (i = 0; i < numLinhasMat1; i ++) {
+			for (j = 0; j < numColunasMat2; j++) {
+				for (x = 0; x < numColunasMat1; x++) {
+					mult += mat1[indice(i +1, x +1, numColunasMat1)] * mat2[indice(x +1, j +1, numColunasMat2)];
+				}
+				matrizResposta[indice(i +1, j +1, numColunasMat2)] = mult;
+				mult = 0;
 			}
-			matrizResposta[indice(i +1, j +1, numColunasMat2)] = mult;
-			mult = 0;
 		}
 	}
+	else {
+		printf("As matrizes sÃ£o incompativeis");
+	}
+
 }
 
 //Printar transposta
@@ -82,7 +88,7 @@ void printarTransposta (int mat[], int linhas, int colunas) {
 }
 
 //Soma duas matrizes
-void somarMatrizes (int mat1[], int mat2[], int linhas, int colunas, int matrizSoma[]) {
+void somarMatrizes (int mat1[], int mat2[], int linhas, int colunas, int matrizSoma[]) {	
 	int i, j;
 	for (i = 0; i < linhas; i++) {
 		for (j = 0; j < colunas; j++) {
@@ -98,26 +104,31 @@ void somarMatrizes (int mat1[], int mat2[], int linhas, int colunas, int matrizS
 
 //Verificar se matriz eh identidade
 int ehIdentidade(int mat[], int linhas, int colunas) {
-	int i, j;
-	for (i = 0; i < linhas; i++) {
-		for (j = 0; j < colunas; j++) {
-			if (i == j){
-				if (mat[indice(i+1, j+1, colunas)] == 1){
+	if (linhas == colunas) {
+		int i, j;
+		for (i = 0; i < linhas; i++) {
+			for (j = 0; j < colunas; j++) {
+				if (i == j){
+					if (mat[indice(i+1, j+1, colunas)] == 1){
+						continue;
+					}
+					else{
+						return 0;
+					}
+				}
+				else if (mat[indice(i+1, j+1, colunas)] == 0){
 					continue;
 				}
 				else{
 					return 0;
 				}
 			}
-			else if (mat[indice(i+1, j+1, colunas)] == 0){
-				continue;
-			}
-			else{
-				return 0;
-			}
 		}
+		return 1;
 	}
-	return 1;
+	else {
+		return 0;
+	}
 }
 
 //Verificar se matriz eh invers a outra
@@ -138,7 +149,7 @@ void main() {
 	srand(time(NULL));
 	
 
-	// TESTE QUESTÃO 01 =====
+	// TESTE QUESTï¿½O 01 =====
 	int mat1[6],  mat2[6], matProduto[9];
 	
 	preencher(mat1, 3, 2);
@@ -157,8 +168,8 @@ void main() {
 	printf ("\n");
 	
 	
-	// TESTE QUESTÃO 02 =====
-	//Para que a soma exista, as matrizes devem ter a mesma dimensão, se preferirem, podem adicionar um teste de condição
+	// TESTE QUESTï¿½O 02 =====
+	//Para que a soma exista, as matrizes devem ter a mesma dimensï¿½o, se preferirem, podem adicionar um teste de condiï¿½ï¿½o
 	
 	int mat3[9], mat4[9], matSoma[9];
 	
@@ -166,15 +177,19 @@ void main() {
 	preencher(mat4, 3, 3);
 	
 	printf ("SOMA\n\n");
+	printarMatriz(mat3, 3, 3);
+	printf("\n");
+	printarMatriz(mat4, 3, 3);
+	printf("\n");
 	somarMatrizes(mat3, mat4, 3, 3, matSoma); //O prcedimento ja printa;
 	printf ("\n\n");
 	
-	// TESTE QUESTÃO 03 =====
+	// TESTE QUESTï¿½O 03 =====
 	
-	//A matriz deve ser quadrada, se preferirem, podem adicionar um teste de condição
+	//A matriz deve ser quadrada, se preferirem, podem adicionar um teste de condiï¿½ï¿½o
 	int mat5[9];
 	
-	//Mat, nº de colunas, valor, linhas e coluna
+	//Mat, nï¿½ de colunas, valor, linhas e coluna
 	//PODEM ALTERAR OS VALORES, JA FOI TESTADO E ELA FUNCIONA
 	
 	adicionarElemento(mat5, 3, 1, 1, 1);
@@ -197,7 +212,7 @@ void main() {
 		printf ("Nao eh identidade");
 	}
 	
-	//TESTE QUESTÃO 04 =====
+	//TESTE QUESTï¿½O 04 =====
 	
 	
 
