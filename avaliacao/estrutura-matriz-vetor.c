@@ -76,6 +76,7 @@ void produtoMatriz(int mat1[], int mat2[], int numLinhasMat1, int numColunasMat1
 
 }
 
+
 //Printar transposta
 void printarTransposta (int mat[], int linhas, int colunas) {
 	int i, j;
@@ -132,17 +133,23 @@ int ehIdentidade(int mat[], int linhas, int colunas) {
 }
 
 //Verificar se matriz eh invers a outra
-int ehInversa (int mat1[], int mat2[], int numColunasMat1, int numLinhasMat1, int numColunasMat2, int numLinhasMat2) {
+int ehInversa (int mat1[], int mat2[], int numLinhasMat1, int numColunasMat1, int numLinhasMat2, int numColunasMat2) {
 	
-	int matResultante[dimensionarMatriz(numColunasMat1, numColunasMat1)]; //matriz quadrad, sempre
+	// int matResultante[dimensionarMatriz(numColunasMat1, numColunasMat1)]; //matriz quadrad, sempre
+	int matResultante[dimensionarMatriz(numLinhasMat1, numColunasMat2)];
 	
-	produtoMatriz(mat1, mat2, numColunasMat1, numLinhasMat1, numColunasMat2, numLinhasMat2, matResultante);
-	
-	if (ehIdentidade(matResultante, numColunasMat1, numColunasMat1)) {
+	// produtoMatriz(mat1, mat2, numColunasMat1, numLinhasMat1, numColunasMat2, numLinhasMat2, matResultante);
+	produtoMatriz(mat1, mat2, numLinhasMat1, numColunasMat1, numLinhasMat2, numColunasMat2, matResultante);
+	printarMatriz(matResultante, numLinhasMat1, numColunasMat2);
+	printf("\n");
+
+	// if (ehIdentidade(matResultante, numColunasMat1, numColunasMat1)
+	if (ehIdentidade(matResultante, numLinhasMat1, numColunasMat2) == 1) {
 		return 1;
 	}
 	return 0;
 }
+
 
 void main() {
 	
@@ -211,9 +218,60 @@ void main() {
 	else{
 		printf ("Nao eh identidade");
 	}
+
+	printf("\n\n\n");
 	
 	//TESTE QUEST�O 04 =====
 	
-	
+	// ao multiplicar a matriz A por B, se B for inversa de A, = a uma matriz identidade
+	printf ("\nMATRIZ INVERSA \n\n");
 
+	int mat6[6], mat7[6];
+
+	preencher(mat6, 3, 2);
+	preencher(mat7, 2, 3);
+
+
+	printarMatriz(mat6, 3, 2);
+	printf("\n");
+	printarMatriz(mat7, 2, 3);
+	printf("\n");
+
+	if (ehInversa(mat6, mat7, 3, 2, 2, 3) == 1) {
+		printf("A matriz B é a inversa de A");
+	}
+	else {
+		printf("A matriz B não é a inversa de A");
+	} 
+    
+	// // matriz invera real
+	// int mat8[6], mat9[6];
+
+	// adicionarElemento(mat8, 2, 1, 1, 1);
+	// adicionarElemento(mat8, 2, 0, 1, 2);
+	// adicionarElemento(mat8, 2, 0, 2, 1);
+	// adicionarElemento(mat8, 2, 1, 2, 2);
+	// adicionarElemento(mat8, 2, 0, 3, 1);
+	// adicionarElemento(mat8, 2, 0, 3, 2);
+
+	// adicionarElemento(mat9, 3, 1, 1, 1);
+	// adicionarElemento(mat9, 3, 0, 1, 2);
+	// adicionarElemento(mat9, 3, 0, 1, 3);
+	// adicionarElemento(mat9, 3, 0, 2, 1);
+	// adicionarElemento(mat9, 3, 1, 2, 2);
+	// adicionarElemento(mat9, 3, 0, 2, 3);
+
+	// printarMatriz(mat6, 3, 2);
+	// printf("\n");
+	// printarMatriz(mat7, 2, 3);
+	// printf("\n");
+
+	// if (ehInversa(mat6, mat7, 3, 2, 2, 3) == 1) {
+	// 	printf("A matriz B é a inversa de A");
+	// }
+	// else {
+	// 	printf("A matriz B não é a inversa de A");
+	// } 
+
+	
 }
