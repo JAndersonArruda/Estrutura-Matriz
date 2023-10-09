@@ -16,7 +16,7 @@ void main() {
 	preencher(mat1, 3, 2);
 	
 	preencher(mat2, 2, 3);
-	
+	 
 	printarMatriz(mat1, 3, 2);
 	printf ("\n");
 	printarMatriz(mat2, 2, 3);
