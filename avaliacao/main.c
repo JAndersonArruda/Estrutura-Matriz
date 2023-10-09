@@ -92,10 +92,10 @@ void main() {
 	printf("\n");
 
 	if (ehInversa(mat6, mat7, 3, 2, 2, 3) == 1) {
-		printf("A matriz B é a inversa de A");
+		printf("A matriz B é a inversa de A \n");
 	}
 	else {
-		printf("A matriz B não é a inversa de A");
+		printf("A matriz B não é a inversa de A \n");
 	} 
     
     /*
